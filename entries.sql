@@ -49,3 +49,7 @@ ON entries(content_type_id);
 
 CREATE INDEX idx_entries_data 
 ON entries USING GIN (data);
+
+ALTER TABLE entries ADD COLUMN deleted_at TIMESTAMP;
+
+SELECT * FROM entries
