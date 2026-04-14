@@ -70,7 +70,7 @@ SELECT
     data->>'title' AS title,
     data->>'content' AS content
 FROM entries
-WHERE content_type_id = :post_id;
+WHERE content_type_id = '79f187e4-0ed5-4622-a69f-2a64a99c4162';
 
 -- =========================================
 -- 6. Filtro tipo búsqueda
