@@ -1,12 +1,14 @@
 CREATE TABLE entries (
-    id SERIAL PRIMARY KEY,
-    content_type_id INTEGER NOT NULL REFERENCES content_types(id) ON DELETE CASCADE,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    content_type_id UUID NOT NULL 
+        REFERENCES content_types(id) ON DELETE CASCADE,
 
     slug TEXT UNIQUE,
 
     data JSONB NOT NULL,
 
-    status TEXT DEFAULT 'draft', -- draft | published | archived
+    status TEXT DEFAULT 'draft',
 
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
