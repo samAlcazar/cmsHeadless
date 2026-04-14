@@ -13,3 +13,5 @@ CREATE TABLE fields (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
+
+-- Para probar la subida a github
