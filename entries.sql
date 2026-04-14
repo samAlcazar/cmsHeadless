@@ -44,5 +44,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE INDEX idx_entries_content_type 
+ON entries(content_type_id);
+
 CREATE INDEX idx_entries_data 
 ON entries USING GIN (data);

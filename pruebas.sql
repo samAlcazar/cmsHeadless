@@ -15,17 +15,18 @@ SELECT create_content_type(
 -- 2. Crear fields
 -- =========================================
 
-SELECT create_field(:post_id, 'title', 'Título', 'string', TRUE);
-SELECT create_field(:post_id, 'content', 'Contenido', 'richtext');
-SELECT create_field(:post_id, 'cover', 'Portada', 'image');
-SELECT create_field(:post_id, 'status', 'Estado', 'string', FALSE, FALSE, NULL, '{"values":["draft","published"]}');
+SELECT create_field('79f187e4-0ed5-4622-a69f-2a64a99c4162', 'title', 'Título', 'string', TRUE);
+SELECT create_field('79f187e4-0ed5-4622-a69f-2a64a99c4162', 'content', 'Contenido', 'richtext');
+SELECT create_field('79f187e4-0ed5-4622-a69f-2a64a99c4162', 'cover', 'Portada', 'image');
+SELECT create_field('79f187e4-0ed5-4622-a69f-2a64a99c4162', 'status', 'Estado', 'string', FALSE, FALSE, NULL, '{"values":["draft","published"]}');
+
 
 -- =========================================
 -- 3. Insertar entries (datos fake)
 -- =========================================
 
 SELECT create_entry(
-    :post_id,
+    '79f187e4-0ed5-4622-a69f-2a64a99c4162',
     '{
         "title": "Primer post",
         "content": "Contenido de prueba...",
@@ -36,7 +37,7 @@ SELECT create_entry(
 );
 
 SELECT create_entry(
-    :post_id,
+    '79f187e4-0ed5-4622-a69f-2a64a99c4162',
     '{
         "title": "Segundo post",
         "content": "Otro contenido...",
@@ -56,7 +57,7 @@ SELECT
     status,
     data
 FROM entries
-WHERE content_type_id = :post_id;
+WHERE content_type_id = '79f187e4-0ed5-4622-a69f-2a64a99c4162';
 
 -- =========================================
 -- 5. Consulta tipo API (flatten JSON)
@@ -79,5 +80,5 @@ SELECT
     id,
     data->>'title' AS title
 FROM entries
-WHERE content_type_id = :post_id
+WHERE content_type_id = '79f187e4-0ed5-4622-a69f-2a64a99c4162'
 AND data->>'title' ILIKE '%Primer%';

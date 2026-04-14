@@ -32,6 +32,3 @@ BEGIN
     RETURN new_id;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE INDEX idx_entries_content_type 
-ON entries(content_type_id);
