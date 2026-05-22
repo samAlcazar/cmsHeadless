@@ -10,6 +10,8 @@ CREATE TABLE entries (
 
     status TEXT DEFAULT 'draft',
 
+    created_by UUID REFERENCES users(id),
+    updated_by UUID REFERENCES users(id),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
     published_at TIMESTAMP
@@ -20,7 +22,8 @@ CREATE OR REPLACE FUNCTION create_entry(
     p_content_type_id UUID,
     p_data JSONB,
     p_status TEXT DEFAULT 'draft',
-    p_slug TEXT DEFAULT NULL
+    p_slug TEXT DEFAULT NULL,
+    p_created_by UUID DEFAULT NULL
 )
 RETURNS UUID AS $$
 DECLARE
@@ -30,13 +33,15 @@ BEGIN
         content_type_id,
         data,
         status,
-        slug
+        slug,
+        created_by
     )
     VALUES (
         p_content_type_id,
         p_data,
         p_status,
-        p_slug
+        p_slug,
+        p_created_by
     )
     RETURNING id INTO new_id;
 
